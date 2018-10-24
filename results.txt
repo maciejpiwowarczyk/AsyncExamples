@@ -79,3 +79,61 @@ AsyncExamples.ExecutionOrderFirst().InAsyncSafe();
  3051 [4] ExecutionOrderThird: Finished
  3051 [4] ExecutionOrderSecond: Finished
  3051 [4] ExecutionOrderFirst: Finished
+-------------------------------------------------------------------
+AsyncExamples.ThrowableComputationFlowAsync(new Exception("do not suppress"), ex => ex.Message == "suppress").InAsyncSafe();
+-------------------------------------------------------------------
+    0 [1] Main: Start
+    4 [1] ThrowableComputationFlowAsync: Starting
+    6 [1] ThrowableComputationAsync: Starting
+   16 [1] Main: Press any key...
+ 1013 [4] ThrowableComputationAsync: Throwing
+ 1050 [4] InAsyncSafe: Caught InAsyncSafe: System.AggregateException: One or more errors occurred. (do not suppress) ---> System.Exception: do not suppress
+   at AsyncExamples.ThrowableComputationAsync(Exception exceptionToThrow) in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 132
+   at AsyncExamples.SuppressErrors[T](Task`1 task, Func`2 suppressPredicate) in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 97
+   at AsyncExamples.ThrowableComputationFlowAsync(Exception exceptionToThrow, Func`2 suppressPredicate) in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 116
+   --- End of inner exception stack trace ---
+---> (Inner Exception #0) System.Exception: do not suppress
+   at AsyncExamples.ThrowableComputationAsync(Exception exceptionToThrow) in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 132
+   at AsyncExamples.SuppressErrors[T](Task`1 task, Func`2 suppressPredicate) in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 97
+   at AsyncExamples.ThrowableComputationFlowAsync(Exception exceptionToThrow, Func`2 suppressPredicate) in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 116<---
+-------------------------------------------------------------------
+AsyncExamples.ThrowableComputationFlowAsync(new Exception("suppress"), ex => ex.Message == "suppress").InAsyncSafe();
+-------------------------------------------------------------------
+    0 [1] Main: Start
+    4 [1] ThrowableComputationFlowAsync: Starting
+    5 [1] ThrowableComputationAsync: Starting
+   15 [1] Main: Press any key...
+ 1013 [4] ThrowableComputationAsync: Throwing
+ 1072 [4] SuppressErrors: Suppressed exception System.Exception: suppress
+   at AsyncExamples.ThrowableComputationAsync(Exception exceptionToThrow) in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 132
+   at AsyncExamples.SuppressErrors[T](Task`1 task, Func`2 suppressPredicate) in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 97
+ 1072 [4] ThrowableComputationFlowAsync: Got result: 0
+-------------------------------------------------------------------
+AsyncExamples.ThrowableComputationFlowWithDefaultSuppressAsync(new Exception("do not suppress")).InAsyncSafe();
+-------------------------------------------------------------------
+    0 [1] Main: Start
+    5 [1] ThrowableComputationFlowWithDefaultSuppressAsync: Starting
+    6 [1] ThrowableComputationAsync: Starting
+   17 [1] Main: Press any key...
+ 1013 [4] ThrowableComputationAsync: Throwing
+ 1048 [4] InAsyncSafe: Caught InAsyncSafe: System.AggregateException: One or more errors occurred. (do not suppress) ---> System.Exception: do not suppress
+   at AsyncExamples.ThrowableComputationAsync(Exception exceptionToThrow) in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 144
+   at AsyncExamples.SuppressErrors[T](Task`1 task, Func`2 suppressPredicate) in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 97
+   at AsyncExamples.ThrowableComputationFlowWithDefaultSuppressAsync(Exception exceptionToThrow) in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 128
+   --- End of inner exception stack trace ---
+---> (Inner Exception #0) System.Exception: do not suppress
+   at AsyncExamples.ThrowableComputationAsync(Exception exceptionToThrow) in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 144
+   at AsyncExamples.SuppressErrors[T](Task`1 task, Func`2 suppressPredicate) in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 97
+   at AsyncExamples.ThrowableComputationFlowWithDefaultSuppressAsync(Exception exceptionToThrow) in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 128<---
+-------------------------------------------------------------------
+AsyncExamples.ThrowableComputationFlowWithDefaultSuppressAsync(new Exception("suppress")).InAsyncSafe();
+-------------------------------------------------------------------
+    0 [1] Main: Start
+    4 [1] ThrowableComputationFlowWithDefaultSuppressAsync: Starting
+    5 [1] ThrowableComputationAsync: Starting
+   17 [1] Main: Press any key...
+ 1013 [4] ThrowableComputationAsync: Throwing
+ 1049 [4] SuppressErrors: Suppressed exception System.Exception: suppress
+   at AsyncExamples.ThrowableComputationAsync(Exception exceptionToThrow) in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 144
+   at AsyncExamples.SuppressErrors[T](Task`1 task, Func`2 suppressPredicate) in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 97
+ 1049 [4] ThrowableComputationFlowWithDefaultSuppressAsync: Got result: 0

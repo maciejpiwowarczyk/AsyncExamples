@@ -25,7 +25,11 @@ namespace EightQueens
                 //AsyncExamples.AsyncTask().InAsyncSafe();
                 //AsyncExamples.AsyncTaskWithOwnTryCatch();
                 //AsyncExamples.AsyncTaskWithOwnTryCatchNested();
-                AsyncExamples.ExecutionOrderFirst().InAsyncSafe();
+                //AsyncExamples.ExecutionOrderFirst().InAsyncSafe();
+                //AsyncExamples.ThrowableComputationFlowAsync(new Exception("do not suppress"), ex => ex.Message == "suppress").InAsyncSafe();
+                //AsyncExamples.ThrowableComputationFlowAsync(new Exception("suppress"), ex => ex.Message == "suppress").InAsyncSafe();
+                //AsyncExamples.ThrowableComputationFlowWithDefaultSuppressAsync(new Exception("do not suppress")).InAsyncSafe();
+                AsyncExamples.ThrowableComputationFlowWithDefaultSuppressAsync(new Exception("suppress")).InAsyncSafe();
 
                 Printer.Print("Press any key...");
                 Console.Read();
