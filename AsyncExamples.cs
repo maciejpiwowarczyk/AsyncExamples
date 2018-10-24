@@ -63,4 +63,29 @@ public static class AsyncExamples
         Printer.Print("Finished and throwing...");
         throw new Exception("_boom: NestedAsyncCall_");
     }
+
+    public static async Task ExecutionOrderFirst()
+    {
+        Printer.Print("Starting");
+        await Task.Delay(1000);
+        Printer.Print("About to await next method");
+        await ExecutionOrderSecond();
+        Printer.Print("Finished");
+    }
+
+    public static async Task ExecutionOrderSecond()
+    {
+        Printer.Print("Starting");
+        await Task.Delay(1000);
+        Printer.Print("About to await next method");
+        await ExecutionOrderThird();
+        Printer.Print("Finished");
+    }
+
+    public static async Task ExecutionOrderThird()
+    {
+        Printer.Print("Starting");
+        await Task.Delay(1000);
+        Printer.Print("Finished");
+    }
 }

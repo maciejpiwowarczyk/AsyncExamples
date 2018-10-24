@@ -24,7 +24,8 @@ namespace EightQueens
                 //AsyncExamples.AsyncTask().GetAwaiter().GetResult();
                 //AsyncExamples.AsyncTask().InAsyncSafe();
                 //AsyncExamples.AsyncTaskWithOwnTryCatch();
-                AsyncExamples.AsyncTaskWithOwnTryCatchNested();
+                //AsyncExamples.AsyncTaskWithOwnTryCatchNested();
+                AsyncExamples.ExecutionOrderFirst().InAsyncSafe();
 
                 Printer.Print("Press any key...");
                 Console.Read();

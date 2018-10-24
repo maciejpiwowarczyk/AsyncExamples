@@ -66,3 +66,16 @@ AsyncExamples.AsyncTaskWithOwnTryCatchNested();
  1112 [4] AsyncTaskWithOwnTryCatchNested: Caught exception: System.Exception: _boom: NestedAsyncCall_
    at AsyncExamples.NestedAsyncCall() in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 64
    at AsyncExamples.AsyncTaskWithOwnTryCatchNested() in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 49
+-------------------------------------------------------------------
+AsyncExamples.ExecutionOrderFirst().InAsyncSafe();
+-------------------------------------------------------------------
+    2 [1] Main: Start
+   19 [1] ExecutionOrderFirst: Starting
+   34 [1] Main: Press any key...
+ 1037 [4] ExecutionOrderFirst: About to await next method
+ 1040 [4] ExecutionOrderSecond: Starting
+ 2044 [4] ExecutionOrderSecond: About to await next method
+ 2047 [4] ExecutionOrderThird: Starting
+ 3051 [4] ExecutionOrderThird: Finished
+ 3051 [4] ExecutionOrderSecond: Finished
+ 3051 [4] ExecutionOrderFirst: Finished
