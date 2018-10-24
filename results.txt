@@ -1,0 +1,68 @@
+-------------------------------------------------------------------
+AsyncVoid
+-------------------------------------------------------------------
+    0 [1] Main: Start    
+    2 [1] AsyncVoid: Starting...
+   11 [1] Main: Press any key...
+ 1012 [5] AsyncVoid: Finished and throwing...
+ 1134 [5] OnAppDomainUnhandled: AppDomain.Unhandled exception: System.Exception: _boom: AsyncVoid_
+   at AsyncExamples.AsyncVoid() in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 11
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+Unhandled Exception: System.Exception: _boom: AsyncVoid_
+   at AsyncExamples.AsyncVoid() in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 11
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+-------------------------------------------------------------------
+AsyncExamples.AsyncTask();
+-------------------------------------------------------------------
+    0 [1] Main: Start
+    4 [1] AsyncTask: Starting...
+   31 [1] Main: Press any key...
+ 1034 [5] AsyncTask: Finished and throwing...
+ 5015 [3] ContinuousGc: Executing full GC...
+10017 [3] ContinuousGc: Executing full GC...
+-------------------------------------------------------------------
+AsyncExamples.AsyncTask().GetAwaiter().GetResult();
+-------------------------------------------------------------------
+    0 [1] Main: Start
+    1 [1] AsyncTask: Starting...
+ 1015 [5] AsyncTask: Finished and throwing...
+System.Exception: _boom: AsyncTask_
+   at AsyncExamples.AsyncTask() in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 19
+   at AsyncExamples.Program.Main(String[] args) in C:\vsprojects\AsyncExamples\Program.cs:line 22
+ 1055 [1] Main: Done!
+-------------------------------------------------------------------
+AsyncExamples.AsyncTask().InAsyncSafe();
+-------------------------------------------------------------------
+	0 [1] Main: Start
+    1 [1] AsyncTask: Starting...
+   13 [1] Main: Press any key...
+ 1013 [5] AsyncTask: Finished and throwing...
+ 1102 [5] InAsyncSafe: Caught InAsyncSafe: System.AggregateException: One or more errors occurred. (_boom: AsyncTask_) ---> System.Exception: _boom: AsyncTask_
+   at AsyncExamples.AsyncTask() in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 19
+   --- End of inner exception stack trace ---
+---> (Inner Exception #0) System.Exception: _boom: AsyncTask_
+   at AsyncExamples.AsyncTask() in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 19<---
+-------------------------------------------------------------------
+AsyncExamples.AsyncTaskWithOwnTryCatch();
+-------------------------------------------------------------------
+    0 [1] Main: Start
+    2 [1] AsyncTaskWithOwnTryCatch: Starting...
+   11 [1] Main: Press any key...
+ 1014 [4] AsyncTaskWithOwnTryCatch: Finished and throwing...
+ 1098 [4] AsyncTaskWithOwnTryCatch: Caught exception: System.Exception: _boom: AsyncTaskWithOwnTryCatch_
+   at AsyncExamples.AsyncTaskWithOwnTryCatch() in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 36
+-------------------------------------------------------------------
+AsyncExamples.AsyncTaskWithOwnTryCatchNested();
+-------------------------------------------------------------------
+    0 [1] Main: Start
+    4 [1] AsyncTaskWithOwnTryCatchNested: Starting...
+    5 [1] NestedAsyncCall: Starting...
+   12 [1] Main: Press any key...
+ 1016 [4] NestedAsyncCall: Finished and throwing...
+ 1112 [4] AsyncTaskWithOwnTryCatchNested: Caught exception: System.Exception: _boom: NestedAsyncCall_
+   at AsyncExamples.NestedAsyncCall() in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 64
+   at AsyncExamples.AsyncTaskWithOwnTryCatchNested() in C:\vsprojects\AsyncExamples\AsyncExamples.cs:line 49
